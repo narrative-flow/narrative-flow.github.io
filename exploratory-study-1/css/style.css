@@ -1,0 +1,106 @@
+body {
+  padding-top: 160px;
+  background: #ffffff;
+}
+
+#header {
+  height: 90px;
+  width: 100%;
+  position: absolute;
+  top: 10px;
+}
+#logo {
+  background: url("../img/r2d3-logo.png") no-repeat top left;
+  background-size: cover;
+  margin: 45px 0;
+  width: 60px;
+  height: 60px;
+  display: block;
+}
+
+#footer {
+  background: #323137;
+  padding-top: 70px;
+  padding-bottom: 160px;
+  color: #d1d2d8;
+}
+#footer a {
+  color: #fff;
+  text-decoration: underline;
+}
+.team-bio h3 {
+  margin-top: 0;
+  font-weight: normal;
+  font-size: 1.3em;
+  color: #fff;
+}
+#footer-logo {
+  width: 100%;
+  background: url("../img/r2d3-large-white.png") no-repeat top left;
+  background-size: contain;
+  display: block;
+  height: 120px;
+}
+.footer-portrait {
+  width: 100%;
+  border: 8px solid #fff;
+}
+#about-r2d3 {
+  margin-bottom: 60px;
+}
+.team-bio {
+  margin-bottom: 30px;
+}
+
+.mailing-list {
+  margin: 10px 0;
+  padding: 10px 20px 10px;
+  background-color: #fff;
+  border: 1px solid #e1e8ed;
+  border-radius: 3px;
+}
+
+/* Utilities */
+.hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+#controls{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  padding: 10px 0 5px 3%;
+  background-color: white;
+  z-index: 1000002;
+  border-bottom: 1px solid gray;
+}
+
+#stepper{
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 5px 0 60px 5px;
+  background-color: white;
+  z-index: 1000000;
+}
+
+#stepper button{
+  margin: 5px 5px 5px 25px;
+  width: 40%;
+}
+
+.stepper{
+  border-style: solid;
+  border-width: 2px;
+  border-color: #666;
+  padding: 15px;
+}
+
+.non-stepper{
+  opacity: 0;
+}

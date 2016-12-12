@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+
+<h1>Results of a Linear Mixed Effects Model for Engagement Questions</h1>
+
+</body>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+// some code initialized from: http://bl.ocks.org/chrisbrich/0759cd5d7cab4db4610b
+
+// chart variables
+var file = "data/eng.csv";
+
+// create the confidence interval chart
+var margin = {top: 10, right: 150, bottom: 100, left: 40},
+    size = 5,
+    width = 960 - margin.left - margin.right,
+    height = 200 - margin.top - margin.bottom,
+    y = d3.scaleBand().range([height, 0]),
+    x = d3.scaleLinear().range([0, width]),
+    yAxis = d3.axisLeft().scale(y),
+    xAxis = d3.axisBottom().scale(x);
+
+// create first CI bullet chart
+createConfidenceIntervalBulletChart(file, "Average Model Across All 14 Questions");
+
+// create CI bullet charts for each engagement question
+questions = [
+  "1. I was absorbed in reading the story.",
+  "2. I forgot about my immediate surroundings while reading through this story.",
+  "3. The time I spent reading just slipped away.",
+  "4. I felt frustrated, annoyed, or discouraged while reading through this story.",
+  "5. I found this story confusing to read through.",
+  "6. Reading through this story was mentally taxing.",
+  "7. This story was aesthetically appealing to read.",
+  "8. This reading experience appealed to my visual senses.",
+  "9. The reading experience encouraged me to finish reading the story.",
+  "10. My reading experience was rewarding.",
+  "11. The reading experience was different from a typical online reading experience.",
+  "12. The reading experience interested me in the story.",
+  "13. I was really drawn into the reading experience.",
+  "14. Reading through the story was fun."
+];
+for(var i = 1; i < 15; i++){
+  var filename = "data/eng-" + i + ".csv";
+  createConfidenceIntervalBulletChart(filename, questions[i - 1]);
+}
+
+// support creating multiple CI bullet charts through function (pass in filename)
+function createConfidenceIntervalBulletChart(f, t){
+  d3.select("body").append("h3").text(t).style("margin-top", "50px");
+  var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("class","container")
+    .attr("transform", "translate(" + margin.bottom + "," + margin.top + ")");
+
+  d3.csv(f, function(e, d){
+    // x.domain([1, 5]);
+    // x.domain([2.8, 4.0]);
+    x.domain([2.8, 4.5]);
+    y.domain(["text", "visual", "stepper", "scroller"].reverse());
+    var data = svg.selectAll("g").data(d);
+    var dEnter = data.enter().append("g")
+      .attr("transform", function(d2){
+        return "translate(" + x(d2.means) + "," + (y(d2.names) + y.bandwidth()/2) + ")"
+      }).attr("fill", "#333");
+    dEnter.append("line").attr("stroke-width", 2).attr("stroke", "gray")
+      .attr("y1", 0)
+      .attr("y2", 0)
+      .attr("x1", function(d2){
+        return x(d2.means - d2.spread) - x(d2.means);
+      })
+      .attr("x2", function(d2){
+        return x(d2.means) - x(d2.means - d2.spread);
+      });
+    dEnter.append("circle").attr("r", 5);
+
+    svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform","translate(0," + y.range()[0] + ")")
+      .call(xAxis).attr("opacity", 0.65);
+          
+    svg.append("g")
+      .attr("class","y axis")
+      .attr("transform","translate(" + x.range()[0] + ",0)")
+      .call(yAxis).attr("opacity", 0.65);
+    
+    // add labels to chart
+    var titleOfAxis = ((f === "data/eng.csv") ? "Average " : "") + "Engagement Score (scored 1 to 5)" 
+    svg.select(".x").append("text")
+      .attr("transform", "translate(" + width/2 + "," + margin.bottom/3 + ")")
+      .text(titleOfAxis)
+      .attr("fill", "black");
+  });
+}
+
+
+</script>

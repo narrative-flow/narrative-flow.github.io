@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)http://www.r2d3.us/visual-intro-to-machine-learning-part-1/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>
+Data-Driven Story
+</title>
+
+    <!-- material design lite -->
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- introjs -->
+    <link rel="stylesheet" href="css/introjs.min.css">
+
+    <!-- internal css -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- <script async="" src="http://www.google-analytics.com/analytics.js"></script> -->
+
+	<!-- Google Analytics -->
+	<script>
+		window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+		ga('create', 'UA-53244240-2', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<script async src='//www.google-analytics.com/analytics.js'></script>
+	<!-- End Google Analytics -->
+
+	<!-- material design lite polyfill for dialog boxes (consent & survey) -->
+	<script src="js/dialog-polyfill.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/dialog-polyfill.css" />
+	<style>
+		.mdl-dialog {
+			border: none;
+			position: fixed;
+			box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+			width: 90%; }
+		#consent {
+			z-index: 2000000;
+		}
+		.mdl-dialog__title {
+			padding: 24px 24px 0;
+			margin: 0;
+			font-size: 2.5rem; }
+		.mdl-dialog__actions {
+			padding: 8px 8px 8px 24px;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-flex-direction: row-reverse;
+			-ms-flex-direction: row-reverse;
+			flex-direction: row-reverse;
+			-webkit-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap; }
+		.mdl-dialog__actions > * {
+			margin-right: 8px;
+			height: 36px; }
+		.mdl-dialog__actions > *:first-child {
+			margin-right: 0; }
+		.mdl-dialog__actions--full-width {
+			padding: 0 0 8px 0; }
+		.mdl-dialog__actions--full-width > * {
+			height: 48px;
+			-webkit-flex: 0 0 100%;
+			-ms-flex: 0 0 100%;
+			flex: 0 0 100%;
+			padding-right: 16px;
+			margin-right: 0;
+			text-align: right; }
+		.mdl-dialog__content {
+			padding: 20px 24px 24px 24px;
+			color: rgba(0,0,0, 0.54);
+		    height: 550px; }
+		iframe {
+			height: 100%;
+		}
+		.stop-scrolling {
+			overflow: hidden;
+		}
+		#controls button {
+      margin-top: -0.5em;
+      margin-left: 1em;
+			width: 10em;
+      height: 2.25em;
+		}
+    #controls label{
+      margin-top: -0.2em;
+    }
+    #scroller-switch{
+      margin-left: -5em;
+    }
+    #animation-switch{
+      margin-left: 3em;
+    }
+    #main {
+      margin-top: -100px;
+    }
+		.chapters{
+			margin-left: 20px;
+		}
+	  .invisible{
+			opacity: 0;
+		}
+	</style>
+
+
+    <!-- <script type="text/javascript" async="" src="amplitude-2.2.0-min.gz.js"></script><script type="text/javascript">
+      (function(e,t){var r=e.amplitude||{};var n=t.createElement("script");n.type="text/javascript";
+      n.async=true;n.src="https://d24n15hnbwhuhn.cloudfront.net/libs/amplitude-2.2.0-min.gz.js";
+      var s=t.getElementsByTagName("script")[0];s.parentNode.insertBefore(n,s);r._q=[];
+      function a(e){r[e]=function(){r._q.push([e].concat(Array.prototype.slice.call(arguments,0)));
+      }}var i=["init","logEvent","logRevenue","setUserId","setUserProperties","setOptOut","setVersionName","setDomain","setDeviceId","setGlobalUserProperties"];
+      for(var o=0;o<i.length;o++){a(i[o])}e.amplitude=r})(window,document);
+
+      amplitude.init("77c86adfede57d2b544047b7a2729729");
+    </script> -->
+    <style type="text/css">:root #header + #content > #left > #rlblock_left
+{display:none !important;}</style>
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@r2d3us">
+<meta name="twitter:title" content="A Visual Introduction to Machine Learning">
+<meta name="twitter:description" content="What is machine learning? See how it works with our animated data visualization.">
+<meta name="twitter:image" content="img/preview.png">
+
+<!-- <meta property="og:url" content="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/"> -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Visual Introduction to Machine Learning">
+<meta property="og:description" content="What is machine learning? See how it works with our animated data visualization.">
+<meta property="og:image" content="img/preview.png">
+
+<link href="css/styles-tree.css" rel="stylesheet">
+
+<!-- <link rel="alternate" hreflang="zh" href="http://www.r2d3.us/%E5%9C%96%E8%A7%A3%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E7%AC%AC%E4%B8%80%E7%AB%A0/"> -->
+<!-- <link rel="alternate" hreflang="ru" href="http://www.r2d3.us/%D0%9D%D0%B0%D0%B3%D0%BB%D1%8F%D0%B4%D0%BD%D0%BE%D0%B5-%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-%D0%A2%D0%B5%D0%BE%D1%80%D0%B8%D1%8E-%D0%9C%D0%B0%D1%88%D0%B8%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE-%D0%9E%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F/"> -->
+<!-- <link rel="alternate" hreflang="fr" href="http://www.r2d3.us/lapprentissage-automatique-en-images-chapitre-1/"> -->
+<!-- <link rel="alternate" hreflang="x-default" href="./A Visual Introduction to Machine Learning_files/A Visual Introduction to Machine Learning.html"> -->
+
+  <!-- <script type="text/javascript" charset="utf-8" async="" src="tweet.f7b8715cc79360e1fadb3be41c9c37e1.js"></script> -->
+  </head>
+  <body>
+
+<div class="storyCheck">
+	<div class="container">
+	<div class="row storyCheckRow">
+	<div class="col-xs-3 col-sm-3">
+		<strong>Have you seen this story before?</strong>
+	</div>
+	<div class="col-xs-2 col-sm-2">
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="seenBefore">
+		<input class="mdl-radio__button" id="seenBefore" name="storySeenCheck" type="radio"
+		value="off">
+		<span class="mdl-radio__label">Yes</span>
+		</label>
+	</div>
+	<div class="col-xs-2 col-sm-2">
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="notSeenBefore">
+		<input class="mdl-radio__button" id="notSeenBefore" name="storySeenCheck" type="radio" value="off">
+		<span class="mdl-radio__label">No</span>
+		</label>
+	</div>
+	<div class="col-xs-2 col-sm-2">
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="maybeSeenBefore">
+		<input checked class="mdl-radio__button" id="maybeSeenBefore" name="storySeenCheck" type="radio" value="off">
+		<span class="mdl-radio__label">Not sure</span>
+		</label>
+	</div>
+	<div class="col-xs-1 col-sm-1">
+		<button id="storyCheckFake-button" class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect mdl-button--colored">Close</button>
+	</div>
+	<div class="col-xs-2 col-sm-2">
+		<button id="storyCheck-button" class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect mdl-button--colored">Submit</button>
+  </div>
+	</div>
+	</div>
+</div>
+
+<div class="menu" onclick="toggleSettings()"></div>
+
+  <div id="controls" class="container hide">
+    <div class="row">
+    <div class="col-xs-1 col-sm-1">
+      <em>settings:</em>
+    </div>
+    <div class="col-xs-3 col-sm-3 hide">
+  	  <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2" id="animation-switch" data-intro="This switch toggles between no animation and animation for transitioning between different visualizations.">
+        <input type="checkbox" id="switch-2" class="mdl-switch__input" checked>
+        <!-- <span class="mdl-switch__label">C2. animation</span> -->
+        <span class="mdl-switch__label">animation</span>
+      </label>
+    </div>
+    <div class="col-xs-2 col-sm-2 hide">
+      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1" id="scroller-switch" data-intro="This switch toggles between the stepper and scroller for navigating the story.">
+        <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+        <!-- <span class="mdl-switch__label">C1. scroller</span> -->
+        <span class="mdl-switch__label">scroller</span>
+      </label>
+    </div>
+		<div class="col-xs-3 col-sm-3">
+			<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect conditions" for="cond1">
+				<input checked class="mdl-radio__button" id="cond1" name="condition" type="radio"
+				value="off">
+				<span class="mdl-radio__label">text</span>
+			</label>
+			<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect conditions" for="cond2">
+			<input class="mdl-radio__button" id="cond2" name="condition" type="radio" value="off">
+			<span class="mdl-radio__label">static</span>
+		</label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect conditions" for="cond3">
+			<input class="mdl-radio__button" id="cond3" name="condition" type="radio" value="off">
+			<span class="mdl-radio__label">stepper</span>
+		</label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect conditions" for="cond4">
+			<input class="mdl-radio__button" id="cond4" name="condition" type="radio" value="on" checked="checked">
+			<span class="mdl-radio__label">scroller</span>
+		</label>
+	  </div>
+    <div class="col-xs-3 col-sm-3">
+      <button id="consent-button" class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect">Instructions</button>
+    </div>
+    <div class="col-xs-3 col-sm-3">
+      <button id="survey-button" class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect mdl-button--colored">Questionnaire</button>
+    </div>
+	<div class="col-xs-3 col-sm-3 hide">
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect chapters" for="chap1">
+			<input checked class="mdl-radio__button" id="chap1" name="chapter" type="radio"
+			value="on">
+			<span class="mdl-radio__label">Chapter 1</span>
+		</label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect chapters" for="chap2">
+			<input class="mdl-radio__button" id="chap2" name="chapter" type="radio" value="off">
+			<span class="mdl-radio__label">Chapter 2</span>
+		</label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect chapters" for="chap3">
+			<input class="mdl-radio__button" id="chap3" name="chapter" type="radio" value="auto">
+			<span class="mdl-radio__label">Chapter 3</span>
+		</label>
+	</div>
+    <!-- <div class="col-xs-3 col-sm-3">
+      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-3">
+        <input type="checkbox" id="switch-3" class="mdl-switch__input" checked>
+        <span class="mdl-switch__label">C3. slow-in, slow-out</span>
+      </label>
+    </div> -->
+    <!-- <div class="col-xs-3 col-sm-3">
+      <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-4">
+        <input type="checkbox" id="switch-4" class="mdl-switch__input" checked>
+        <span class="mdl-switch__label">C4. interactions</span>
+      </label>
+    </div> -->
+    </div>
+  </div>
+
+    <!--
+    <div id="header">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-11 col-sm-4">
+            <a id="logo" class="hide-text" href="http://www.r2d3.us/">R2D3</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
+
+<div id="stepper" class="container">
+<div class="row"><div class="col-xs-4">
+  <input id="stepper-slider" class="mdl-slider mdl-js-slider" type="range"
+  min="0" max="100" value="0" tabindex="0" disabled>
+</div></div>
+<div class="row"><div class="col-xs-4">
+  <button id="stepper-prev" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+    <i class="material-icons">arrow_back</i>
+  </button>
+  <button id="stepper-next" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+    <i class="material-icons">arrow_forward</i>
+  </button>
+  <span id="slider-steps" style="margin-left:30px"></span>/
+  <span id="slider-total"></span>
+</div></div>
+</div>
+
+
+
+  <dialog id="consent" class="mdl-dialog">
+	  <h3 class="mdl-dialog__title">Instructions</h3>
+	  <div class="mdl-dialog__content">
+		  <iframe class="consent" src="intro.html" frameborder="0"></iframe>
+	  </div>
+	  <div class="mdl-dialog__actions">
+		  <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">I Agree</button>
+	  </div>
+  </dialog>
+
+
+  <dialog id="survey" class="mdl-dialog">
+	  <h3 class="mdl-dialog__title">Questionnaire</h3>
+	  <div class="mdl-dialog__content">
+		  <iframe class="survey" src="survey.html" frameborder="0"></iframe>
+	  </div>
+  </dialog>
+
+  <dialog id="resolution-checker" class="mdl-dialog">
+	  <h3 class="mdl-dialog__title">Check the Size of your Browser Window</h3>
+	  <div class="mdl-dialog__content">
+		  <iframe class="resolution-checker" src="resolution.html" frameborder="0"></iframe>
+	  </div>
+  </dialog>
+
+	<dialog id="captcha" class="mdl-dialog">
+	  <h3 class="mdl-dialog__title">Attention Check</h3>
+
+	  <div class="mdl-dialog__content">
+		  <iframe class="captcha-checker" src="captcha.html" frameborder="0"></iframe>
+	  </div>
+
+	  <div class="mdl-dialog__actions">
+		  <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Submit Attention Check</button>
+	  </div>
+  </dialog>
+
+
+
+<div class="container" id="main">
+<div class="chap1">
+	<div class="row" id="intro">
+		<div class="col-xs-5">
+			<div id="set-up" class="tracking-section step">
+				<h1>A<span class="altered-text">n</span> <span class="text-to-alter">Visual</span> Introduction to Machine Learning</h1>
+				<!-- <p id="translations" class="small">Translations: <a href="http://www.r2d3.us/%E5%9C%96%E8%A7%A3%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E7%AC%AC%E4%B8%80%E7%AB%A0/">中文</a> <a href="http://www.r2d3.us/%D0%9D%D0%B0%D0%B3%D0%BB%D1%8F%D0%B4%D0%BD%D0%BE%D0%B5-%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-%D0%A2%D0%B5%D0%BE%D1%80%D0%B8%D1%8E-%D0%9C%D0%B0%D1%88%D0%B8%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE-%D0%9E%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D1%8F/">русский</a> <a href="http://www.r2d3.us/lapprentissage-automatique-en-images-chapitre-1/">Français</a></p> -->
+				<p>In machine learning, computers apply <strong>statistical learning</strong> techniques to automatically identify patterns in data. These techniques can be used to make highly accurate predictions. </p>
+				<p><span class="hide"><em>Keep scrolling.</em></span> Using a data set about homes, we will create a machine learning model to distinguish homes in New York from homes in San Francisco.</p>
+			</div>
+			<div id="keep-scrolling" style="top: 517px; opacity: 1;">
+				<div id="animated-arrow" class="hover-animation">
+					<p>scroll</p>
+					<svg width="40" height="10">
+						<path d="M0,0L40,0L20,10Z" fill="#000" stroke="none"></path>
+					</svg>
+				</div>
+			</div>
+			<hr class="whitespace" style="height: 30vh;">
+			<div id="first-two" class="tracking-section step">
+				<h2>First, some intuition</h2>
+				<p>Let’s&nbsp;say you had to determine whether a home is in <strong style="color:rgb(65, 153, 43);">San Francisco</strong> or in <strong style="color:rgb(16, 70, 131);">New York</strong>. In machine learning terms, categorizing data points is a <strong>classification</strong> task.</p>
+				<p>Since San Francisco is relatively hilly, the elevation of a home may be a good way to distinguish the two cities.</p>
+				<p>Based on <span class="text-to-alter">the</span> home-elevation data<span class="text-to-alter"> to the right</span>, you could argue that a home above 240 ft should be <strong>classified</strong> as one in San Francisco.</p>
+			</div>
+			<hr class="whitespace" style="height: 40vh;">
+			<div id="add-nuance" class="step">
+				<h2>Adding nuance</h2>
+				<p>Adding another <strong>dimension</strong> allows for more nuance. For example, New York apartments can be extremely expensive per square foot.</p>
+				<p><span class="text-to-alter">So visualizing</span><span class="altered-text">Visualizing</span> elevation <em>and</em> price per square foot in a <strong>scatterplot</strong> helps us distinguish lower-elevation homes.</p>
+				<p>The data suggests that, among homes at or below 240 ft, those that cost more than $1776 per square foot are in New York City.</p>
+				<p>Dimensions in a data set are called <strong>features</strong>, <strong>predictors</strong>, or <strong>variables</strong>. <span class="footnote-anchor">1</span></p>
+
+			</div>
+			<hr class="whitespace" style="height: 30vh;">
+			<div id="set-boundaries" class="tracking-section step">
+				<h2>Drawing boundaries</h2>
+				<p><span class="text-to-alter">You can visualize</span><span class="altered-text">Then you could visualize</span> your elevation (&gt;242 ft) and price per square foot (&gt;$1776) observations as the boundaries of regions in <span class="text-to-alter">your</span><span class="altered-text">a</span> scatterplot. Homes plotted in the green and blue regions would be in San Francisco and New York, respectively.</p>
+
+				<p>Identifying boundaries in data using math is the essence of statistical learning.</p>
+
+				<p>Of course, you’ll need additional information to distinguish homes with lower elevations <em>and</em> lower per-square-foot prices.</p>
+			</div>
+			<hr class="whitespace" style="height: 50vh;">
+			<hr class="whitespace whitespace-to-keep" style="height: 5vh;">
+			<div id="more-variables">
+				<div id="getting-more-data" class="tracking-section">
+				</div>
+				<div id="listing-the-variables" class="step">
+					<!--<div id="data-table"></div>-->
+					<p>The dataset we are using to create the model has 7 different dimensions. Creating a model is also known as <strong>training</strong> a model.</p>
+					<p><span class="text-to-alter">On the right, we are visualizing</span><span class="altered-text">We could visualize</span> the variables in a <strong>scatterplot matrix</strong> to show the relationships between each pair of dimensions.</p>
+					<p><span class="text-to-alter">There are clearly</span><span class="altered-text">This would show</span> patterns in the data, but the boundaries for delineating them are not obvious.</p>
+				</div>
+
+				<hr class="whitespace" style="height: 30vh;">
+        <div id="from-boundaries-to-pattern" class="tracking-section step">
+				<h2>And now, machine learning</h2>
+					<p>Finding patterns in data is where machine learning comes in. Machine learning methods use statistical learning to identify boundaries.</p>
+					<p>One example of a machine learning method is a <strong>decision tree</strong>. Decision trees look at one variable at a time and are a reasonably accessible (though rudimentary) machine learning method. </p>
+				</div>
+
+				<hr class="whitespace" style="height: 30vh;">
+			</div>
+		</div>
+	</div>
+</div>
+	<!-- OLD chapter markers <div class="chap2">-->
+	<div class="row" id="split">
+	  <div class="col-xs-4">
+		<!-- <div class="col-xs-4 col-xs-push-8"> -->
+			<hr class="whitespace" style="height: 20vh;">
+
+<div class="chap1">
+
+        <div id="elevation-to-histogram" class="tracking-section">
+        <div id="elevation-to-histogram-intro" class="step">
+				<h2>Finding better boundaries</h2>
+				<p>Let's revisit the 240-ft elevation boundary proposed previously to see how we can improve upon our intuition.</p>
+				<p>Clearly, this requires a different perspective.</p>
+        </div>
+				<hr class="whitespace" style="height: 40vh;">
+        <div id="elevation-to-transformation" class="step">
+				<p>By transforming our visualization into a <strong>histogram</strong>, we <span class="text-to-alter">can</span><span class="altered-text">could</span> better see how frequently homes appear at each elevation.</p>
+				<p>While the highest home in New York is ~240 ft, the majority of them <span class="text-to-alter">seem to</span> have far lower elevations.</p>
+        </div>
+
+      <hr class="whitespace" style="height: 30vh;">
+      </div>
+			<div id="introduce-split" class="tracking-section step">
+				<h2>Your first fork</h2>
+
+				<p>A decision tree uses if-then statements to define patterns in data.</p>
+				<p>For example, <strong>if</strong> a home's elevation is above some number, <strong>then</strong> the home is probably in San Francisco.</p>
+			</div>
+      <hr class="whitespace" style="height: 30vh;">
+			<div id="explain-gini" class="tracking-section">
+      <div id="explain-gini-intro" class="step">
+				<p>In machine learning, these statements are called <strong>forks</strong>, and they split the data into two <strong>branches</strong> based on some value.</p>
+				<p>That value between the branches is called a <strong>split point</strong>. Homes to the left of that point get categorized in one way, while those to the right are categorized in another. A split point is the decision tree's version of a boundary. </p> </div>
+				<hr class="whitespace" style="height: 50vh;">
+        <div id="explain-gini2" class="step">
+				<h2>Tradeoffs</h2>
+				<p>Picking a split point has tradeoffs. Our initial split (~240 ft) incorrectly classifies some San Francisco homes as New York ones.</p>
+
+				<p><span class="text-to-alter">Look at that large slice of green in the left pie chart</span><span class="altered-text">For homes below 240ft there are some not in New York</span>, those are all the San Francisco homes that are misclassified. These are called <strong>false negatives</strong>.</p>
+        </div>
+
+				<hr class="whitespace" style="height: 50vh;">
+
+
+				<div id="explain-gini-split"  class="step">
+        <p>However, a split point meant to capture every San Francisco home will include many New York homes as well. These are called <strong>false&nbsp;positives</strong>.</p>
+        </div>
+				<hr class="whitespace" style="height: 50vh;">
+
+        <div id="explain-gini-split2" class="step">
+				<h2>The best split</h2>
+
+				<p>At the <strong>best split</strong>, the results of each branch should be as homogeneous (or pure) as possible. There are several mathematical methods you can choose between to calculate the best split.<span class="footnote-anchor">2</span></p>
+        </div>
+				<hr class="whitespace" style="height: 20vh;">
+        <div id="explain-gini-final-split" class="step">
+				<p>As <span class="text-to-alter">we see</span><span class="altered-text">discussed</span> here, even the best split on a single feature does not fully separate the San Francisco homes from the New York ones.</p>
+			</div>
+      <hr class="whitespace" style="height: 10vh;">
+      <hr class="whitespace" style="height: 30vh;">
+      </div>
+
+</div>
+<div class="chap2">
+
+			<div id="further-split" class="tracking-section step">
+				<h2>Recursion</h2>
+				<p>To add another split point, the algorithm repeats the process above on the subsets of data. This repetition is called <strong>recursion</strong>, and it is a concept that appears frequently in training models.<span class="footnote-anchor">3</span></p>
+
+				<span class="text-to-alter"><p class="small">The histograms to the left show the distribution of each subset, repeated for each variable.</p></span>
+        </div>
+				<hr class="whitespace" style="height: 30vh;">
+        <div id="further-split-2" class="step">
+				<p>The best split will vary based which branch of the tree you are looking at. <span class="footnote-anchor">4</span></p>
+
+				<p>For lower elevation homes, price per square foot is, at <em id="left-side-split-value">$1061 per sqft</em>, is the best variable for the next if-then statement. For higher elevation homes, it is <em id="right-side-split-attribute">price</em>, at <em id="right-side-split-value">$514500 </em>.
+				</p>
+        </div>
+        <hr class="whitespace" style="height: 40vh;">
+
+		</div>
+		</div>
+	</div>
+	<!--</div>-->
+	<!-- OLD chapter markers <div class="chap3">-->
+	<div class="chap2">
+	<div class="row" id="tree">
+		<div class="col-xs-4">
+      <hr class="whitespace" style="height: 30vh;">
+			<div id="growing-the-tree" class="step">
+				<h2>Growing a tree</h2>
+				<p>Additional forks will add new information that can increase a tree's <strong>prediction accuracy</strong>. </p>
+        </div>
+				<hr class="whitespace" style="height: 40vh;">
+        <div id="growing-the-tree-2" class="step">
+				<p>Splitting one layer deeper, the tree's accuracy improves to <strong>84%</strong>.</p>
+        </div>
+				<hr class="whitespace" style="height: 60vh;">
+        <div id="growing-the-tree-3" class="step">
+				<p>Adding several more layers, we get to <strong>96%</strong>.</p>
+        </div>
+				<hr class="whitespace" style="height: 60vh;">
+        <div id="growing-the-tree-4" class="step">
+				<p>You could even continue to add branches until the tree's predictions are <strong>100% accurate</strong>, so that at the end of every branch, the homes are purely in San Francisco or purely in New York.</p>
+        </div>
+				<hr class="whitespace" style="height: 60vh;">
+      <div id="leaf-nodes" class="step">
+				<p>These ultimate branches of the tree are called <strong>leaf nodes</strong>. Our decision tree models will classify the homes in each leaf node according to which class of homes is in the majority.</p>
+			</div>
+      <hr class="whitespace" style="height: 30vh;">
+
+		</div>
+	</div>
+	<div class="row" id="test">
+		<div class="col-xs-4">
+    <hr class="whitespace" style="height: 35vh;">
+
+			<div id="classify-training-data" class="tracking-section step">
+				<h2>Making predictions</h2>
+				<p>The newly-trained decision tree model determines whether a home is in San Francisco or New York by running each data point through the branches.</p>
+        </div>
+
+				<hr class="whitespace" style="height: 35vh;" p="">
+        <div id="classify-training-data-2" class="step">
+				<p><span class="text-to-alter">Here you can see the data</span><span class="altered-text">You could imagine the data</span> that was used to train the tree flow through the tree.</p>
+
+				<p>This data is called <strong>training data</strong> because it was used to train the model.</p>
+        </div>
+				<hr class="whitespace" style="height: 35vh;">
+        <div id="classify-training-data-3" class="step">
+				<p>Because we grew the tree until it was 100% accurate, this tree maps each training data point perfectly to which city it is in.</p>
+        </div>
+
+      <hr class="whitespace" style="height: 40vh;">
+			<div id="classify-test-data" class="tracking-section step">
+				<h2>Reality check</h2>
+
+				<p>Of course, what matters more is how the tree performs on previously-unseen data.</p>
+
+				 <hr class="whitespace" style="height: 40vh;"> 
+				<p>To <strong>test</strong> the tree's performance on new data, we need to apply it to data points that it has never seen before. This previously unused data is called <strong>test data</strong>.</p>
+        </div>
+				<hr class="whitespace" style="height: 40vh;">
+        <div id="classify-test-data-2" class="step">
+				<p>Ideally, the tree should perform similarly on both known and unknown data.</p>
+
+				 <hr class="whitespace" style="height: 25vh;"> 
+				<p><span class="text-to-alter">So this one is less than ideal.<span class="footnote-anchor">5</span></span>
+				<span class="altered-text">By running this decision tree on the new data, we find it to have 89.7% accuracy. 12 homes from San Francisco get classified as being in New York, and 13 homes from New York get classified into the San Francisco category.</span></p>
+        </div>
+				<hr class="whitespace" style="height: 25vh;">
+
+			<div id="misclassification" class="tracking-section step">
+
+				<p>These errors are due to <strong>overfitting</strong>. Our model has learned to treat every detail in the training data as important, even details that turned out to be irrelevant.</p>
+
+				<p>Overfitting is part of a fundamental concept in machine learning that we’ll explain in our next post.<span class="footnote-anchor">6</span></p>
+			</div>
+      <hr class="whitespace" style="height: 30vh;">
+		</div>
+	</div>
+
+		<div class="row">
+			<div class="col-xs-8 col-xs-offset-2">
+				<div id="conclusion" class="tracking-section step">
+				<hr class="whitespace" style="height: 10vh;">
+        <h2>Recap</h2>
+				<ol>
+					<li>Machine learning identifies patterns using <strong>statistical learning</strong> and computers by unearthing <strong>boundaries</strong> in data sets. You can use it to make predictions.</li>
+					<li>One method for making predictions is called a decision tree, which uses a series of if-then statements to identify boundaries and define patterns in the data</li>
+					<li><strong>Overfitting</strong> happens when some boundaries are based on on <em>distinctions that don't make a difference</em>. You can see if a model overfits by having test data flow through the model.</li>
+				</ol>
+        </div>
+				<hr class="whitespace" style="height: 25vh;">
+			</div>
+		</div>
+
+</div>
+
+		<div class="row">
+
+      <div class="col-xs-8 col-xs-offset-2">
+        <div id="up-next" class="step" style="margin-bottom: 10vh">
+        <h2>Original Source of Story</h2>
+        <p>
+        This story is an example copied for the purposes of academic study. It was originally created by r2d3.
+        </p>
+
+				<p class="stateA">
+					After you have answered the question in orange above and fully read the story, please press the button below.
+				</p>
+
+				<p class="stateB">
+					After you have fully read the second portion of this story, please press the button below.
+				</p>
+				
+				<p class="stateF">
+					After you have answered the question in orange above and fully read the story, please press the button below.
+				</p>
+
+				<!-- form for interactions -->
+				<div>
+					<form id="iform" method="POST" action="https://script.google.com/macros/s/AKfycbx-NhUGb-FH51pnYPCmAvPourPR7nVJYSEVa9hcNvytZsWXtjCL/exec">
+
+					<button id="submit" class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect mdl-button--colored questionnaire-button">Continue to
+						<span class="stateF">Questionnaire</span>
+						<span class="stateA">the next Chapter</span>
+						<span class="stateB">Questionnaire</span>
+					</button>
+
+					<input type="hidden" id="user-id" name="user-id">
+					<input type="hidden" id="condition" name="condition">
+					<input type="hidden" id="study-state" name="study-state">
+					<input type="hidden" id="browser" name="browser">
+					<input type="hidden" id="res-start" name="res-start">
+					<input type="hidden" id="res-end" name="res-end">
+					<input type="hidden" id="interactions" name="interactions">
+					<input type="hidden" id="time" name="time">
+					</form>
+		    </div>
+        </div>
+        <hr class="whitespace" style="height: 15vh;">
+      </div>
+
+      <!--
+      <div class="col-xs-8 col-xs-offset-2">
+        <div id="up-next" class="step">
+				<h2>Coming up next</h2>
+
+				<p>In our next post, we will explore overfitting, and how it relates to a fundamental trade-off in machine learning.</p>
+				<p>Questions? Thoughts? We would love to hear from you. Tweet us at <a href="https://twitter.com/r2d3us" target="_blank">@r2d3us</a> or email us at <a href="mailto:team@r2d3.us">team@r2d3.us</a>.</p>
+				<p>Want to be notified when the next post is released?</p>
+        </div>
+				<hr class="whitespace" style="height: 5vh;">
+			</div>
+      -->
+
+			<!-- <div class="col-xs-5">
+				<p class="small">Follow us on Twitter...</p>
+				<iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="twitter-tweet twitter-tweet-rendered" style="position: static; visibility: visible; display: block; width: 100%; height: 541.281px; padding: 0px; border: none; max-width: 500px; min-width: 220px; margin-top: 10px; margin-bottom: 10px;" data-tweet-id="625681063893864449" title="Twitter Tweet"></iframe>
+				<script async="" src="js/widgets.js" charset="utf-8"></script>
+			</div> -->
+			<!-- <div class="col-xs-5 col-xs-offset-1">
+				<p class="small">… or keep in touch with email!</p>
+				<div class="mailing-list">
+					<form action="http://r2d3.createsend.com/t/i/s/tywdu/" method="post" id="subForm">
+						<h4>Posts from R2D3.us</h4>
+						<div class="form-group">
+						  <input id="fieldEmail" name="cm-tywdu-tywdu" class="form-control" type="email" value="your email here" required="">
+						</div>
+						<div class="form-group">
+						  <button class="btn btn-primary" type="submit">Keep in touch!</button>
+					 	</div>
+					</form>
+				</div>
+
+				<hr class="whitespace" style="height: 25vh;">
+			</div> -->
+		</div>
+		<div class="row step" id="footnotes" style="height: 1px; overflow: hidden;">
+			<div class="col-xs-8">
+				<h3>Footnotes</h3>
+				<ol id="footnote-list">
+					<li>Machine learning concepts have arisen across disciplines (computer science, statistics, engineering, psychology, etc), thus the different nomenclature.</li>
+					<li>To learn more about calculating the optimal split, search for 'gini index' or 'cross entropy'. </li>
+					<li>One reason computers are so good at applying statistical learning techniques is that they're able to do repetitive tasks, very quickly and without getting bored.</li>
+					<li>The algorithm described here is <em>greedy</em>, because it takes a top-down approach to splitting the data. In other words, it is looking for the variable that makes each subset the most homogeneous <em>at that moment</em>.</li>
+					<li>Hover over the dots to see the path it took in the tree.</li>
+					<li>Spoiler alert: It's the bias/variance tradeoff!</li>
+				</ol>
+			</div>
+		</div>
+	
+	</div>
+
+</div>
+
+<div class="conditionA stateA">
+	<span>condition A</span>
+</div>
+<div class="conditionB stateB">
+	<span>condition B</span>
+</div>
+
+<div class="static-image-step hide" id="static-0"><img class="static-image" src="img/step-0.PNG"></div>
+<div class="static-image-step hide" id="static-1"><img class="static-image" src="img/step-1.PNG"></div>
+<div class="static-image-step hide" id="static-2"><img class="static-image" src="img/step-2.PNG"></div>
+<div class="static-image-step hide" id="static-3"><img class="static-image" src="img/step-3.PNG"></div>
+<div class="static-image-step hide" id="static-4"><img class="static-image" src="img/step-4.PNG"></div>
+<!--<div class="static-image-step hide" id="static-5"><img class="static-image" src="img/step-5.PNG"></div>-->
+<div class="static-image-step hide" id="static-6"><img class="static-image" src="img/step-5.PNG"></div>
+<div class="static-image-step hide" id="static-7"><img class="static-image" src="img/step-7.PNG"></div>
+<div class="static-image-step hide" id="static-8"><img class="static-image" src="img/step-8.PNG"></div>
+<div class="static-image-step hide" id="static-9"><img class="static-image" src="img/step-9.PNG"></div>
+<div class="static-image-step hide" id="static-10"><img class="static-image" src="img/step-10.PNG"></div>
+<div class="static-image-step hide" id="static-11"><img class="static-image" src="img/step-11.PNG"></div>
+<!--<div class="static-image-step hide" id="static-12"><img class="static-image" src="img/step-12.PNG"></div>-->
+<!--<div class="static-image-step hide" id="static-13"><img class="static-image" src="img/step-13.PNG"></div>-->
+<!--<div class="static-image-step hide" id="static-14"><img class="static-image" src="img/step-14.PNG"></div>-->
+<div class="static-image-step hide" id="static-15"><img class="static-image" src="img/step-15.PNG"></div>
+<!--<div class="static-image-step hide" id="static-16"><img class="static-image" src="img/step-16.PNG"></div>-->
+<!--<div class="static-image-step hide" id="static-17"><img class="static-image" src="img/step-17.PNG"></div>-->
+<div class="static-image-step hide" id="static-18"><img class="static-image" src="img/step-18.PNG"></div>
+<!--<div class="static-image-step hide" id="static-19"><img class="static-image" src="img/step-19.PNG"></div>-->
+<!--<div class="static-image-step hide" id="static-20"><img class="static-image" src="img/step-20.PNG"></div>-->
+<div class="static-image-step hide" id="static-21"><img class="static-image" src="img/step-23.PNG"></div>
+<!--<div class="static-image-step hide" id="static-22"><img class="static-image" src="img/step-22.PNG"></div>-->
+
+<!-- DO WE WANT FIXED TOP SPECIFIED OR NAW? -->
+<!-- OLD chapter markers: 1, 1, 2, 3, 3 -->
+<div class="static-container chap1" id="shadow-scatterplot" style="transform: translate(0, 0px)"></div>
+<div class="static-container chap1" id="intro-scatterplot" style="top: 0px; position: fixed;"></div>
+<div class="static-container" id="split-quality" style="top: 4546.95px; position: absolute; left: 39%;"></div>
+<div class="static-container chap2" id="decision-tree" style="top: 10495.1px; position: absolute;"></div>
+<div class="static-container chap2" id="train-vs-test" style="top: 13332.8px; position: absolute;"></div>
+
+    <div id="footer" class="tracking-section hide">
+      <div class="container">
+        <div class="row">
+          <div id="about-r2d3" class="col-xs-12 col-sm-5">
+            <div class="row">
+              <div class="col-xs-3">
+                <a id="footer-logo" class="hide-text" target="_blank" href="http://www.r2d3.us/">R2D3</a>
+              </div>
+              <div class="col-xs-9">
+                <p>R2D3 is an experiment in expressing statistical thinking with interactive design. Find us at <a target="_blank" href="https://twitter.com/r2d3us">@r2d3us</a>.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-7">
+            <div class="row team-bio">
+              <div class="col-xs-3">
+                <img class="footer-portrait" src="img/jadeyee.png">
+              </div>
+              <div class="col-xs-8">
+                <h3>Stephanie interprets R2</h3>
+                <p>Stephanie is currently finishing up a masters degree at Stanford in statistics. In the past, she's been at <a target="_blank" href="https://siftscience.com/">Sift Science</a>, Google, <a target="_blank" href="http://www.bain.com/">Bain &amp; Company</a>, and <a target="_blank" href="http://www.vectorcapital.com/">Vector Capital</a>.</p>
+
+                <p>Find Stephanie: <a href="http://www.linkedin.com/in/stephaniejyee" target="_blank">LinkedIn</a> <a href="http://twitter.com/stephaniejyee" target="_blank">Twitter</a> <a href="mailto:yee@r2d3.us" target="_blank">Email</a></p>
+              </div>
+            </div>
+            <div class="row team-bio">
+              <div class="col-xs-3">
+                <img class="footer-portrait" src="img/tonyhschu.png">
+              </div>
+              <div class="col-xs-8">
+                <h3>Tony visualizes with D3</h3>
+                <p>Tony is a designer who loves data visualizations and information design. He is currently the lead designer at <a target="_blank" href="https://siftscience.com/">Sift Science</a>. Prior to Sift Science, he tried to <a target="_blank" href="http://letsfreecongress.org/">change congress with a fancy infographic</a>, and earned an <a target="_blank" href="http://interactiondesign.sva.edu/">MFA in Interaction Design at the School of Visual Arts</a> in New York City.</p>
+                <p>Find Tony: <a href="http://tonyhschu.ca/" target="_blank">Portfolio</a> <a href="http://twitter.com/tonyhschu/" target="_blank">Twitter</a> <a href="http://blog.tonyhschu.ca/" target="_blank">Blog</a> <a href="https://www.linkedin.com/in/tonyhschu" target="_blank">LinkedIn</a> <a target="_blank" href="mailto:chu@r2d3.us">Email</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<script src="js/study.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/underscore.js"></script>
+    <script src="js/d3.min.js"></script>
+    <!-- <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-56084033-1', 'auto');
+      ga('send', 'pageview');
+    </script> -->
+    <script src="js/riveted.min.js"></script>
+
+<script src="js/intro.min.js"></script>
+<script src="js/tree-training-set-98.js"></script>
+<script src="js/backbone.js"></script>
+<script src="js/rAF-polyfill.js"></script>
+<script src="js/helpers.js"></script>
+<script src="js/main.js"></script>
+
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+
+<div id="footnote-container" style="top: 0px; left: 0px; opacity: 0;"></div>
+
+</body>
+
+<script>
+
+	// global uid for setting or passing URL's
+	var uid = "";
+
+	// global function to fill in interaction form data
+	var insertDataIntoForm;
+
+	// global function to open up our captcha
+	var openUpCaptcha;
+
+	(function() {
+		'use strict';
+		var showIntro = true;
+        var dialogButton = document.querySelector('#consent-button');
+		var dialog = document.querySelector('#consent');
+		if (! dialog.showModal) {
+			dialogPolyfill.registerDialog(dialog);
+		}
+		function showConsentForm(){
+			recordTime("show-intro");
+			dialog.showModal();
+			$('body').addClass('stop-scrolling');
+			$('body').bind('touchmove', function(e){e.preventDefault();});
+		}
+		function hideConsentForm(){
+			dialog.close();
+      if(!stepper){
+			  $('body').removeClass('stop-scrolling');
+        $('body').unbind('touchmove');
+      }
+            // show intro.js
+            // also utilize our initial conditions!
+            // if(showIntro){
+              // if(initialAnimationCondition == 0){
+                // recordTime("initial-no-animation");
+                // document.querySelector('#animation-switch').MaterialSwitch.off();
+                // showNoAnimation();
+              // }
+              if(initialNavigationCondition == 0){
+                recordTime("initial-stepper");
+                document.querySelector('#scroller-switch').MaterialSwitch.off();
+                showStepper();
+              }
+              // introJs().start();
+              // showIntro = false;
+            // }
+			recordTime("hide-intro");
+		}
+		dialogButton.addEventListener('click', showConsentForm);
+		dialog.querySelector('button:not([disabled])')
+				.addEventListener('click', hideConsentForm);
+
+		// functions for our survey form dialog
+    var surveyButton = document.querySelector('#survey-button');
+		var survey = document.querySelector('#survey');
+		if (! survey.showModal) {
+			dialogPolyfill.registerDialog(survey);
+		}
+		function showSurvey(){
+			// start timer
+			var surveyStart = Math.round(performance.now()) / 1000.0;
+
+			recordTime("show-survey");
+			survey.showModal();
+			$('body').addClass('stop-scrolling');
+			$('body').bind('touchmove', function(e){e.preventDefault();});
+			// load our timing data into the survey
+      var form = $("iframe.survey").contents();
+			form.contents().find("#timing-data").val(JSON.stringify(pageTimingData));
+      // load all other data into hidden fields
+      var finalResolutionWidth = window.innerWidth;
+      var finalResolutionHeight = window.innerHeight;
+      form.find("#browser").val(userAgentString);
+      form.find("#res-start").val(initialResolutionWidth + "x" + initialResolutionHeight);
+      form.find("#res-end").val(finalResolutionWidth + "x" + finalResolutionHeight);
+			var storyCondition = "";
+			if(mainCondition === "cond1"){
+				storyCondition = "text";
+			}else if(mainCondition === "cond2"){
+				storyCondition = "static";
+			}else if(mainCondition === "cond3"){
+				storyCondition = "stepper";
+			}else if(mainCondition === "cond4"){
+				storyCondition = "scroller";
+			}
+			form.find("#condition").val(storyCondition);
+
+			// remove visualization questions on text condition
+			if(mainCondition === "cond1"){
+  			form.find(".visual-conditions-only").remove();
+			}
+
+			// store timer in form for iframe
+			form.find("#survey-time").val(surveyStart);
+		}
+		function hideSurvey(){
+			survey.close();
+      if(!stepper){
+			  $('body').removeClass('stop-scrolling');
+			  $('body').unbind('touchmove');
+      }
+			recordTime("hide-survey");
+		}
+    surveyButton.addEventListener('click', showSurvey);
+
+    // initial variables to capture for survey: random id, resolution, browser
+    var userAgentString = navigator.userAgent;
+    var initialResolutionWidth = window.innerWidth;
+    var initialResolutionHeight = window.innerHeight;
+
+    // also store initial conditions (variables in main.js)
+    // animation: on 1, otherwise none on 0
+    // navigation: scroller on 1, otherwise arrow button/stepper on 0
+    // var initialAnimationCondition = Math.floor(Math.random() * 2);
+		var initialAnimationCondition = 1;
+    // var initialNavigationCondition = Math.floor(Math.random() * 2);
+		var initialNavigationCondition = 1;
+
+		// load consent dialog on page load!
+		if(studyState === "A" || studyState === "F"){
+			if(!debugMode){
+    		showConsentForm();
+			}
+		}
+
+		// check browser size to start story
+		// performResolutionCheck();
+
+		// remove interactions from the story
+		d3.selectAll("circle").on("mouseenter", function(){});
+		d3.selectAll("rect").on("mouseenter", function(){});
+
+		// user must pass story check to continue
+		var passStoryCheck = false;
+		function checkStoryResponse(){
+			var correctResponse = document.querySelector("#notSeenBefore").checked;
+			if(correctResponse){
+				closeStoryChecker();
+				passStoryCheck = true;
+			// user has wrong response, kick em out
+			}else{
+				restrictUser();
+			}
+		}
+		// if successful, hide dialog
+		function closeStoryChecker(){
+			recordTime("hide-check");
+			document.querySelector(".storyCheck").style.display = "none";
+		}
+		if(debugMode || studyState === "B"){
+			passStoryCheck = true;
+			closeStoryChecker();
+		}
+
+		// wire up story checker buttons
+		var storyCheckButton = document.querySelector('#storyCheck-button');
+		var storyCheckFakeButton = document.querySelector("#storyCheckFake-button");
+    storyCheckButton.addEventListener('click', checkStoryResponse);
+		storyCheckFakeButton.addEventListener("click", restrictUser);
+
+		// captcha opening is wired up through the interaction log submit form now!
+
+		// captcha question opener
+	  var captcha = document.querySelector("#captcha");
+		if (! captcha.showModal) {
+			dialogPolyfill.registerDialog(captcha);
+		}
+		openUpCaptcha = function openCaptcha(){
+			// wipe story from browser & write a cookie to keep from refreshing
+			restrictUserInFuture();
+			// captcha check only in certain study states
+			if(studyState === "B" || studyState === "F"){
+				recordTime("show-captcha");
+				// user must have answered the story question first!
+				if(passStoryCheck){
+					processCaptcha();
+					captcha.showModal();
+					$('body').addClass('stop-scrolling');
+					$('body').bind('touchmove', function(e){e.preventDefault();});
+				}else{
+					restrictUser();
+				}
+			// when we just want to display the next page's URL! from state A to state B
+			}else{
+				if(passStoryCheck){
+				}else{
+					restrictUser();
+				}
+			}
+		}
+		captcha.querySelector("button").addEventListener("click", closeCaptcha);
+		// close captcha, open questionnaire
+		function closeCaptcha(){
+			recordTime("hide-captcha");
+			captcha.close();
+			if(captchaCheck()){
+				// send to next page for survey or else bring up survey
+				if(studyState === "B"){
+				}else{
+					showSurvey();
+				}
+			}else{
+				restrictUser();
+			}
+		}
+		function processCaptcha(){
+			// hide question if text-only or vis-only case for full story mode only
+			if(studyState === "F"){
+				if(mainCondition === "cond1"){
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector(".text-only").style.display = "block";
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector(".vis-only").style.display = "none";
+				}else{
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector(".vis-only").style.display = "block";
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector(".text-only").style.display = "none";
+				}
+			
+			// show all questions for all conditions otherwise
+			// but limit based on if text condition is used at all
+			}else{
+				if(firstCondition === "cond1"){
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector(".some-text").style.display = "inline";
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector(".all-vis").style.display = "none";
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector("#q-c-2-2").parentNode.parentNode.style.display = "none";
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector("#q-c-2-5").parentNode.parentNode.style.display = "none";
+				}else if(secondCondition === "cond1"){
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector(".some-text").style.display = "inline";
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector(".all-vis").style.display = "none";
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector("#q-c-2-1").parentNode.parentNode.style.display = "none";
+					document.querySelector(".captcha-checker").contentWindow.document.querySelector("#q-c-2-3").parentNode.parentNode.style.display = "none";
+				}
+			}
+		}
+
+		// manually lock page from scrolling to start
+		// load consent dialog on page load!
+		if(studyState === "A" || studyState === "F"){
+			if(!debugMode){
+				$('body').addClass('stop-scrolling');
+				$('body').bind('touchmove', function(e){e.preventDefault();});
+			}
+		}
+
+		// we must do a few hacks for the scroller partial stories
+		if(studyState === "B" && (mainCondition === "cond4" || mainCondition === "cond3")){
+			window.scroll(0, 1);
+			$("#rotating-canvas").remove();
+		}
+
+		// set or grab the uid
+		if(studyState === "A"){
+			uid = "#" + Math.floor(Math.random() * 1000000);
+		}else if(studyState === "B"){
+			uid = window.location.hash;
+		}
+
+		// fill in interaction form data
+		insertDataIntoForm = function fillInFormData(){
+			// start timer
+			var storyEnd = Math.round(performance.now()) / 1000.0;
+
+			// load our timing data into the survey
+      var form = $("#iform");
+			form.find("#user-id").val(uid);
+			form.find("#interactions").val(JSON.stringify(pageTimingData));
+      // load all other data into hidden fields
+      var finalResolutionWidth = window.innerWidth;
+      var finalResolutionHeight = window.innerHeight;
+      form.find("#browser").val(userAgentString);
+      form.find("#res-start").val(initialResolutionWidth + "x" + initialResolutionHeight);
+      form.find("#res-end").val(finalResolutionWidth + "x" + finalResolutionHeight);
+			var storyCondition = "";
+			if(mainCondition === "cond1"){
+				storyCondition = "Te";
+			}else if(mainCondition === "cond2"){
+				storyCondition = "Vi";
+			}else if(mainCondition === "cond3"){
+				storyCondition = "St";
+			}else if(mainCondition === "cond4"){
+				storyCondition = "Sc";
+			}
+			form.find("#condition").val(storyCondition);
+			form.find("#study-state").val(studyState);
+
+			// store timer in form for iframe
+			var elapsedTime = storyEnd - form.find("#time").val();
+			form.find("#time").val(elapsedTime);
+		}
+
+		// begin story reading time timer
+		var storyStart = Math.round(performance.now()) / 1000.0
+		$("#iform").find("#time").val(storyStart);
+	}());
+</script>
+
+ <script data-cfasync="false" type="text/javascript" src="js/form2.js"></script>
+
+</html>

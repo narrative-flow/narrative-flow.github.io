@@ -1,0 +1,165 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Teaching Bar Charts through Data Visualization</title>
+  <meta name="description" content="a visual data story about the Simpsons characters and how to build and read bar chart visualizations">
+
+  <link rel="stylesheet" href="css/story.css">
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+<div id="swipe"></div>
+
+<div class="content">
+
+
+
+    <h1>Teaching Bar Charts through Data Visualization</h1>
+
+    <div class="section" id="raw">
+       <h3>showing the raw data</h3>
+      <p>Data enables us to better understand the world around us.</p>
+      <p>Take this list of a few characters from the TV show, The Simpsons. It includes their names, genders, and their ages.</p>
+      <p>Let’s start with just the 5 main Simpson family characters.</p>
+    </div>
+
+    <div class="section" id="icons">
+      <p>We can represent each character with an icon, a small and uniform image.</p>
+      <p>Using these icons, we can now imagine how to move our data around in useful ways.</p>
+    </div>
+
+
+
+    <div class="section" id="sort">
+      <h3>visually sorting the data</h3>
+      <p>Let’s first sort each of the Simpsons characters by gender, where females get sorted on the left and males on the right.</p>
+      <p>See how each character icon moves into the respective groups?</p>
+      <p>Now we have a visual representation of gender from our original data table.</p>
+    </div>
+
+    <div class="section" id="compare">
+      <p>This visual order allows us to compare how many girls and boys we have.</p>
+      <p>For example, we have 3 girls on the left and 2 boys on the right.</p>
+      <p>Visually, we see that the difference between these two stacks is 1 character. This tells us that there are more girls than boys and how many more!</p>
+    </div>
+
+
+
+    <div class="section" id="building">
+      <h3>building a bar chart</h3>
+      <p>One method for helping us count icons is to use tick marks, where we place small horizontal lines to align with our icons, with labels to mark individual numbers, like the number of girls and boys.</p>
+      <p>To connect these tick marks, we draw a vertical line to organize and structure these tick marks and labels into a vertical axis.</p>
+    </div>
+
+    <div class="section" id="replace">
+      <p>Now let’s replace our icons with a single rectangle shape around them.</p>
+      <p>This bar shows us the number of characters of each gender in a simpler way.</p>
+      <p>And the vertical axis tells us the number of characters without a need for individual icons.</p>
+    </div>
+
+    <div class="section" id="compare2">
+      <p>Again, we can compare boys and girls using the tick marks on our vertical axis.</p>
+      <p>We see that with 3 girls and 2 boys, our difference is again 1 character between the two, and the taller bar for girls indicates they are greater in number.</p>
+    </div>
+
+
+
+    <div class="section" id="scaling">
+      <h3>scaling to larger datasets</h3>
+      <p>Now we have a simple visual representation of our data using these bars.</p>
+      <p>An added benefit to the bar is that we can add a LOT more data without cluttering our screen.</p>
+      <p>Adding in hundreds of icons would get messy and hard to read and compare, but we can instead show our bars growing and update our labels and axis for a much larger dataset.</p>
+    </div>
+
+
+
+    <div class="section" id="pivoting">
+      <h3>pivoting to a new bar chart</h3>
+      <p>What if we want to see our data grouped by something else… like age?</p>
+      <p>Let’s take our bar chart and color each bar or gender by their age: child or adult.</p>
+      <p>Now we can compare the number of children to the number of adults for each gender.</p>
+    </div>
+
+    <div class="section" id="move">
+      <p>We can move these colors together and update our axis to create a new bar chart for age.</p>
+      <p>Now, we are comparing the number of children to adults in the Simpsons TV show.</p>
+      <p>As before, we can compare values easily in this new bar chart and easily tell which group is greater in number.</p>
+    </div>
+  </div>
+
+  <div class="vis"></div>
+
+  <div class="timeline"></div>
+
+  <div class="control">
+    <button id="step-prev" type="button">previous</button>
+    <button id="step-next" type="button">next</button>
+  </div>
+
+  <div class="story-controls">
+    <div class="story-control">
+      <label for="scroller">
+        <input checked id="scroller" name="input" type="radio"
+        value="on">
+        <span>scroll</span>
+      </label>
+      <label for="stepper">
+        <input id="stepper" name="input" type="radio" value="off">
+        <span>press/swipe</span>
+      </label>
+    </div>
+    <div class="story-control">
+      <label for="continuous">
+        <input checked id="continuous" name="control" type="radio"
+        value="on">
+        <span>continuous</span>
+      </label>
+      <label for="discrete">
+        <input id="discrete" name="control" type="radio" value="off">
+        <span>discrete</span>
+      </label>
+    </div>
+    <div class="story-control">
+      <label for="feedback" id="feedback-label" data-intro="this toggles moving text as a feedback animation">
+        <input type="checkbox" id="feedback" checked>
+        <span>moving text</span>
+      </label>
+    </div>
+    <div class="story-control">
+      <label for="duration" id="duration-label">
+        <input type="text" id="duration">
+        <span>transition duration</span>
+      </label>
+    </div>
+    <div class="story-control">
+      <label for="sticky" id="sticky-label" data-intro="this toggles locking text in a scroller">
+        <input type="checkbox" id="sticky">
+        <span>sticky text</span>
+      </label>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zingtouch/1.0.1/zingtouch.min.js"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>
+  <script src="d3/d3-transition.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+  <script src="js/table.js"></script>
+  <script src="js/bars.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/timeline.js"></script>
+  <script src="js/states.js"></script>
+  <script src="js/story.js"></script>
+  <script src="js/data.js"></script>
+</body>
+</html>

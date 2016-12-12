@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="attention check">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/form.css">
+  <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+  <title>Attention Check</title>
+</head>
+
+<body>
+  <aside>
+   The following questions are separate from the questionnaire. First, you must correctly answer these questions to ensure that you were paying attention to and fully read the story. If you cannot answer these questions correctly, then you will return the HIT.
+  </aside>
+
+  <form id="captcha">
+
+    <fieldset>
+      <span class="question">
+        What is this story about?
+      </span>
+      <div class="mdl-grid survey-grid">
+      <div class="mdl-cell mdl-cell--2-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-1-1">
+        <input type="radio" name="q-c-1" id="q-c-1-1" value="1" class="mdl-radio__button">
+        <span class="mdl-radio__label">computer graphics</span>
+      </label>
+      </div>
+      <div class="mdl-cell mdl-cell--2-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-1-2">
+        <input type="radio" name="q-c-1" id="q-c-1-2" value="2" class="mdl-radio__button">
+        <span class="mdl-radio__label">signal processing</span>
+      </label>
+      </div>
+      <div class="mdl-cell mdl-cell--2-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-1-3">
+        <input type="radio" name="q-c-1" id="q-c-1-3" value="3" class="mdl-radio__button">
+        <span class="mdl-radio__label">mathematics</span>
+      </label>
+      </div>
+      <div class="mdl-cell mdl-cell--2-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-1-4">
+        <input type="radio" name="q-c-1" id="q-c-1-4" value="4" class="mdl-radio__button">
+        <span class="mdl-radio__label">machine learning</span>
+      </label>
+      </div>
+      <div class="mdl-cell mdl-cell--2-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-1-5">
+        <input type="radio" name="q-c-1" id="q-c-1-5" value="5" class="mdl-radio__button">
+        <span class="mdl-radio__label">biology</span>
+      </label>
+      </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="text-only">
+      <span class="question">
+        There were two cities mentioned in this story: New York and ________.
+      </span>
+      <div class="mdl-grid survey-grid">
+      <div class="mdl-cell mdl-cell--2-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-3-1">
+        <input type="radio" name="q-c-3" id="q-c-3-1" value="1" class="mdl-radio__button">
+        <span class="mdl-radio__label">Paris</span>
+      </label>
+      </div>
+      <div class="mdl-cell mdl-cell--2-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-3-2">
+        <input type="radio" name="q-c-3" id="q-c-3-2" value="2" class="mdl-radio__button">
+        <span class="mdl-radio__label">San Francisco</span>
+      </label>
+      </div>
+      <div class="mdl-cell mdl-cell--2-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-3-3">
+        <input type="radio" name="q-c-3" id="q-c-3-3" value="3" class="mdl-radio__button">
+        <span class="mdl-radio__label">Chicago</span>
+      </label>
+      </div>
+      <div class="mdl-cell mdl-cell--2-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-3-4">
+        <input type="radio" name="q-c-3" id="q-c-3-4" value="4" class="mdl-radio__button">
+        <span class="mdl-radio__label">London</span>
+      </label>
+      </div>
+      <div class="mdl-cell mdl-cell--2-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-3-5">
+        <input type="radio" name="q-c-3" id="q-c-3-5" value="5" class="mdl-radio__button">
+        <span class="mdl-radio__label">Beijing</span>
+      </label>
+      </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="vis-only">
+      <span class="question">
+        Which of these <span class="all-vis">5</span><span style="display: none" class="some-text">3</span> visualizations did not appear in the story?
+      </span>
+      <div class="mdl-grid survey-grid">
+      <div class="mdl-cell mdl-cell--4-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-2-1">
+        <input type="radio" name="q-c-2" id="q-c-2-1" value="1" class="mdl-radio__button">
+        <span class="mdl-radio__label"><img src="captcha/captcha-1.PNG"></span>
+      </label>
+      </div>
+      <div class="mdl-cell mdl-cell--4-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-2-2">
+        <input type="radio" name="q-c-2" id="q-c-2-2" value="2" class="mdl-radio__button">
+        <span class="mdl-radio__label"><img src="captcha/captcha-2.PNG"></span>
+      </label>
+      </div>
+      <div class="mdl-cell mdl-cell--4-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-2-3">
+        <input type="radio" name="q-c-2" id="q-c-2-3" value="3" class="mdl-radio__button">
+        <span class="mdl-radio__label"><img src="captcha/captcha-4.PNG"></span>
+      </label>
+      </div>
+      <div class="whitespace"></div>
+      <div class="mdl-cell mdl-cell--4-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-2-4">
+        <input type="radio" name="q-c-2" id="q-c-2-4" value="4" class="mdl-radio__button">
+        <span class="mdl-radio__label"><img src="captcha/captcha-3.PNG"></span>
+      </label>
+      </div>
+      <div class="mdl-cell mdl-cell--4-col">
+      <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="q-c-2-5">
+        <input type="radio" name="q-c-2" id="q-c-2-5" value="5" class="mdl-radio__button">
+        <span class="mdl-radio__label"><img src="captcha/captcha-5.PNG"></span>
+      </label>
+      </div>
+      </div>
+      <div class="whitespace"></div>
+    </fieldset>
+
+  </form>
+
+</body>
+</html>

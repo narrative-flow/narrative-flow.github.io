@@ -1,0 +1,107 @@
+body{
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 4em 1em;
+  color: #444;
+}
+
+#swipe{
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+h1{
+  margin-left: 20px;
+  width: 60%;
+}
+
+h3{
+  margin-top: 1em;
+  margin-bottom: 40px;
+  padding-top: 1em;
+  font-size: 30px;
+}
+
+h1, h2, h3, strong{
+  color: #222;
+}
+
+.content{
+  width: 50%;
+  margin-left: 25%;
+  float: left;
+}
+
+.section{
+  /*margin: 10vh 0 50vh 50px;*/
+  /*padding-right: 50%;*/
+  /*height: 150vh;*/
+  margin-bottom: 100%;
+  width: 50%;
+}
+
+.vis{
+  position: fixed;
+  width: 50%;
+  padding-left: 53%;
+  margin-top: 10vh;
+}
+
+.comparison2 .domain{
+  opacity: 0;
+}
+
+.control{
+  position: fixed;
+}
+
+.wrapper{
+  top: 30%;
+}
+
+.dl {
+  height: 200vh;
+}
+
+.dt {
+  top: 50%;
+  margin-bottom: 20vh;
+}
+
+.timeline{
+  position: fixed;
+  height: 80vh;
+  margin-left: 10vh;
+}
+
+.story-controls{
+  display: flex;
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  border-bottom: 1px solid gray;
+}
+
+.story-control{
+  display: flex;
+  margin: auto;
+  width: 100%;
+  border-left: 1px solid gray;
+}
+
+.story-control label{
+  margin-left: 10%;
+}
+.story-control input{
+  max-width: 20%;
+}
+
+input:disabled{
+  opacity: 0.3;
+}

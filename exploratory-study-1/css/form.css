@@ -1,0 +1,39 @@
+aside{
+  background: rgb(63,81,181);
+  width: 70%;
+  max-width: 1000px;
+  padding: 1em;
+  border-radius: 13px;
+  color: #fff;
+  margin-bottom: 2em;
+}
+.question{
+  font-weight: 700;
+  margin-left: 20px;
+}
+.survey-grid{
+  max-width: 1000px;
+  margin-left: 30px;
+  margin-top: -10px;
+  margin-bottom: 30px;
+}
+.mdl-radio__label{
+  margin-left: -23px;
+  margin-top: -18px;
+  position: absolute;
+  white-space: nowrap;
+  color: #777;
+  font-size: 0.9em;
+  font-weight: 100;
+}
+.survey-spinner{
+  margin-top: 3px;
+  position: absolute;
+}
+.text-field{
+  margin-left: 70px;
+  width: 400px;
+}
+h6{
+  font-style: italic;
+}
