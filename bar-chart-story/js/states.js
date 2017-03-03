@@ -1,14 +1,12 @@
+"use strict";
+
 // declaration of states for automatic creation of stories
 
 // collection of state IDs, to decide state trigger points & text to show in stepper
-// TODO autogenerate from other data structure
-let stateIDs = ["raw", "icons", "sort", "compare", "building", "replace", "replace", "compare2", "scaling", "scaling", "pivoting", "move"];
+var stateIDs = ["raw", "icons", "sort", "compare", "building", "replace", "replace", "compare2", "scaling", "scaling", "pivoting", "move"];
 
-// TODO auto-create operations from a simpler data structure?
-// TODO states seem off by one? record how this works (state A vs state AB vs transition A->B)
-allStates = [{
+var allStates = [{
   id: "raw",
-  // TODO document this: module: { element : function }, elements must be unique
   state: {
     table: {
       wholeTable: "bringIn"
@@ -17,7 +15,7 @@ allStates = [{
       allIcons: "nextToTable"
     }
   }
-},{
+}, {
   id: "icons",
   state: {
     table: {
@@ -30,7 +28,7 @@ allStates = [{
       xAxis: "fadeOut"
     }
   }
-},{
+}, {
   id: "sort",
   state: {
     icons: {
@@ -43,18 +41,18 @@ allStates = [{
       compareAxis2: "fadeOut"
     }
   }
-},{
+}, {
   id: "compare",
   state: {
     bars: {
       compareAxis1: "compareNearIcons",
       compareAxis2: "fadeIn",
       compareAxisDomain: "fadeOut",
-      // TODO temporary fix for stepper, to make sure that each set of states get run together!
+      // NOTE below is a bug fix for stepper
       allBars: "fadeOut"
     }
   }
-},{
+}, {
   id: "building",
   state: {
     icons: {
@@ -67,7 +65,7 @@ allStates = [{
       allBars: "emptyBars"
     }
   }
-},{
+}, {
   id: "replace",
   state: {
     icons: {
@@ -79,7 +77,7 @@ allStates = [{
       yAxis: "fadeOut"
     }
   }
-},{
+}, {
   id: "replace",
   state: {
     bars: {
@@ -89,17 +87,17 @@ allStates = [{
       fullBars: "fadeOut"
     }
   }
-},{
+}, {
   id: "compare2",
   state: {
     bars: {
-      // TODO bug going BACKwards... before went to g = 1 - f(); works fine in stepper? very minor
+      // NOTE bug going BACKwards... before went to g = 1 - f(); ok in stepper
       yAxis: "scaleAxisLarge",
       familyBars: "scaleFamilyBars",
       fullBars: "allEmpty"
     }
   }
-},{
+}, {
   id: "scaling",
   state: {
     bars: {
@@ -108,7 +106,7 @@ allStates = [{
       yAxis: "fadeIn"
     }
   }
-},{
+}, {
   id: "scaling",
   state: {
     bars: {
@@ -118,7 +116,7 @@ allStates = [{
       legend: "fadeOut"
     }
   }
-},{
+}, {
   id: "pivoting",
   state: {
     bars: {
@@ -130,7 +128,7 @@ allStates = [{
       xAxisText: "fadeIn"
     }
   }
-},{
+}, {
   id: "move",
   state: {
     bars: {
