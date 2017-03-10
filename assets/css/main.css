@@ -4152,6 +4152,7 @@
 
 ul.left{
 	margin-left: 10em;
+	text-align: left;
 }
 ul.right{
 	margin-left: 5em;
