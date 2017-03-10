@@ -1,6 +1,6 @@
-# Narrative Flow
+# Visual Narrative Flow
 
-Narrative flow for data visualization storytelling is defined as "the set of factors shaping the consuming experiences of data-driven stories".
+**Visual narrative flow** for data visualization storytelling is defined as "as the congruence between flow-factors, i.e., 1) the way the reader navigates the story, 2) the visual components of that story, and 3) the type of visual feedback a reader receives; along with the nature of the data and facts the author wants to communicate." In this work, we focus on the congruence between these flow-factors.
 
 These Supplemental Materials can be downloaded, and are included in the submission's ZIP file. Due to browser limitations, a web server may need to be started to properly load all webpages that use D3.js and data. Alternatively, you can visit the project home page to view all the supplemental materials online:
 
