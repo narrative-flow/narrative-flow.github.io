@@ -2,7 +2,7 @@
 
 _Authors:_ Sean McKenna, Nathalie Henry Riche, Bongshin Lee, Jeremy Boy, and Miriah Meyer
 
-**Visual narrative flow** for data visualization storytelling is defined as "as the congruence between flow-factors, i.e., 1) the way the reader navigates the story, 2) the visual components of the story, and 3) the type of visual feedback the reader receives; along with the nature of the data and facts the author wants to communicate." For this work, we focus on the congruence of flow-factors.
+**Visual narrative flow** for data visualization storytelling is defined as "as the congruence between flow-factors, i.e., 1) the way the reader navigates the story, 2) the visual components of the story, and 3) the type of visual feedback the reader receives; along with the nature of the data and facts that the author wants to communicate." For this work, we focus on the congruence of flow-factors.
 
 These Supplemental Materials can be downloaded, and are included in the submission's ZIP file. Due to browser limitations, a web server may need to be started to properly load all webpages that use D3.js and data. Alternatively, you can visit the project home page to view all the supplemental materials online:
 
