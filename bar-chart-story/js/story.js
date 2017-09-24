@@ -427,7 +427,7 @@ var stepForward = function stepForward() {
   if (stepperText) {
     $("h1").animate({ opacity: 0 }, 400);
     $(".section:not(#" + stateIDs[stateIndex + 1] + ")").animate({ opacity: 0 }, 400);
-    $("body").animate({ scrollTop: textPos }, 400);
+    $("html,body").animate({ scrollTop: textPos }, 400);
     $("#" + stateIDs[stateIndex + 1]).animate({ opacity: 1 }, 400);
   } else {
     d3.selectAll(".section").style("opacity", 0);
@@ -473,7 +473,7 @@ var stepBackward = function stepBackward() {
   window.scroll(0, textPosPrev);
   // fancy motion of stepper text
   if (stepperText) {
-    $("body").animate({ scrollTop: textPos }, 400);
+    $("html,body").animate({ scrollTop: textPos }, 400);
     $(".section:not(#" + stateIDs[stateIndex + 1] + ")").animate({ opacity: 0 }, 400);
     $("#" + stateIDs[stateIndex + 1]).animate({ opacity: 1 }, 400);
   } else {
